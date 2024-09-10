@@ -4,14 +4,14 @@ import helmet from 'helmet';
 import compression from 'compression';
 import swaggerUi from 'swagger-ui-express';
 import { container } from './container';
-import { APP_CONFIG } from './src/cross_cutting/config/app';
+import { APP_CONFIG } from './cross_cutting/config/app';
 // import routes from './interfaces/http/routes';
-import { logger } from './src/cross_cutting/logging';
-import { mongoPersistenceConnection } from './src/infrastructure/persistence/mongodb/MongoPersistenceConnection';
-import swaggerSpec from './src/cross_cutting/config/swagger';
-import { loggerMiddleware } from './src/cross_cutting/logging';
-import { errorMiddleware } from './src/cross_cutting/error_handling';
-import { corsMiddleware } from './src/interfaces/http/middlewares/cors_middleware';
+import { logger } from './cross_cutting/logging';
+import { mongoPersistenceConnection } from './infrastructure/persistence/mongodb/MongoPersistenceConnection';
+import swaggerSpec from './cross_cutting/config/swagger';
+import { loggerMiddleware } from './cross_cutting/logging';
+import { errorMiddleware } from './cross_cutting/error_handling';
+import { corsMiddleware } from './interfaces/http/middlewares/cors_middleware';
 
 class Server {
   private app: express.Application;

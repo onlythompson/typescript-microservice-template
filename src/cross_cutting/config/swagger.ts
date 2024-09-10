@@ -18,14 +18,14 @@ const options: swaggerJsdoc.Options = {
       },
     ],
   },
-  apis: ['./src/interfaces/http/routes/*.ts', './src/interfaces/http/controllers/*.ts', './src/interfaces/http/schemas/*.yaml', './src/interfaces/http/schemas/request/*.yaml'],
+  apis: ['./src/interfaces/http/routes/*.ts', './src/interfaces/http/controllers/*.ts', './src/interfaces/http/swagger_definitions/*.yaml', './src/interfaces/http/schemas/request/*.yaml'],
 };
 
 const swaggerSpec = swaggerJsdoc(options);
 
 export const swaggerUiOptions: SwaggerUiOptions = {
   // customCss: '.swagger-ui .topbar { display: none }',
-  customSiteTitle: "SwoleMate API Documentation",
+  customSiteTitle: "Microservices API Documentation",
   customfavIcon: "/public/favicon.ico",
   swaggerOptions: {
     defaultModelsExpandDepth: -1, // Hide schemas section by default
