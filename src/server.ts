@@ -103,6 +103,30 @@ class Server {
     };
     retryConnection();
   }
+  public async stop(): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      const server = this.app.listen();
+      server.close(async (err) => {
+        if (err) {
+          logger.error('Error closing server:', err);
+          reject(err);
+        } else {
+          logger.info('Server closed successfully');
+          try {
+            // await mongoPersistenceConnection.closeConnection();
+            // logger.info('Database connection closed successfully');
+            // const cloudEngine : ConfluentCloudEngine = container.resolve(ConfluentCloudEngine);
+            // await cloudEngine.disconnect();
+            logger.info('Kafka connection closed successfully');
+            resolve();
+          } catch (dbError) {
+            logger.error('Error closing database connection:', dbError);
+            reject(dbError);
+          }
+        }
+      });
+    });
+  }
 }
 
 // Create and start the server
@@ -141,8 +165,16 @@ process.on('uncaughtException', (error) => {
 
 // Graceful shutdown
 process.on('SIGTERM', async () => {
-  logger.info('SIGTERM signal received: closing HTTP server and database connection');
-  await mongoPersistenceConnection.closeConnection();
+  logger.info('SIGTERM signal received: closing HTTP server and connections');
+  try {
+    await server.stop();
+    // await mongoPersistenceConnection.closeConnection();
+    logger.info('Server stopped gracefully');
+    process.exit(0);
+  } catch (error) {
+    logger.error('Error during graceful shutdown:', error);
+    process.exit(1);
+  }
 });
 
 export default server;

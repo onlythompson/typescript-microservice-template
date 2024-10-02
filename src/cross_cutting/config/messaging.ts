@@ -37,3 +37,14 @@ export const QUEUES = {
 //       topic: process.env.KAFKA_TOPIC || 'task-events',
 //     },
 //   };
+
+export const kafkaConfig = {
+  clientId: 'template-service',
+  brokers: [process.env.CONFLUENT_BOOTSTRAP_SERVERS!],
+  ssl: true,
+  sasl: {
+    mechanism: 'plain',
+    username: process.env.CONFLUENT_API_KEY!,
+    password: process.env.CONFLUENT_API_SECRET!
+  },
+};
