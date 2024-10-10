@@ -303,6 +303,8 @@ export class RabbitMQClient implements IMessageQueue {
   // Other messaging methods
 }
 
+
+
 // Usage in a service
 @injectable()
 export class NotificationService {
